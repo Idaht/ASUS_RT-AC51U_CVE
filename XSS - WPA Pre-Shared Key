@@ -1,0 +1,31 @@
+Summary:
+
+Cross-site scripting (XSS) vulnerability in the WPA Pre-Shared Key in the wireless settings panel in the administrator web UI in ASUS RT-AC51U wireless router 
+firmware allows injection of arbitrary web script or HTML with a maximum of 63 characters.
+Affects firmware versions up to and including ASUS RT-AC51U 3.0.0.4.380.8591.
+
+Prerequisites:
+
+Access to the administrator web UI of the wireless router.
+
+Steps to reproduce:
+
+1. Log into the administrator web UI of the wirelss router and navigate to the Advanced Settings: Wireless page.
+2. Type into the WPA Pre-Shared Key field: <script>alert('Hi')</script>. If the script is too long for the field, one can edit the HTML to remove it. Right-click 
+   on the field and select the "Inspect" option and remove the maximum length in the HTML.
+3. Save the settings and this will redirect to a new page, where, in this case, the unsanitised password will display an alert box with 'Hi'. Other scripts and 
+   HTMLs can be run as long as the maximum length is 63 characters.
+   
+Timeline:
+
+2022-04-13 Discovered
+2022-05-18 Notified Asus
+2022-05-23 Acknowledged, WONTFIX due to device end-of-life
+2023-03-09 Report made public
+
+Credit:
+
+Ida Heggen Trosdahl, Jørgen Selsøyvold, Donn Morrison
+Pentest bachelor thesis IDI/NTNU spring 2022
+
+Write-up based on: https://gitlab.com/donnm/cves/-/blob/master/dos_rtac51u_httpd.md
